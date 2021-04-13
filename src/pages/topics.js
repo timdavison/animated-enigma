@@ -17,7 +17,7 @@ const IndexPage = ({ data }) => {
     {data.allTaxonomyTermTags.nodes.map(node => {
       return (
         <>
-          <h3><Link to={ node.id }>{ node.name }</Link></h3>
+          <h3><Link to={`/${node.id}` }>{ node.name }</Link></h3>
         </>
       )
     }

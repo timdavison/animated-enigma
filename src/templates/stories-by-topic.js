@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { Link } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 
@@ -9,13 +10,13 @@ export default ({ data }) => {
 
   return (
     <Layout>
-    <h1>{post.taxonomyTermTags.relationships}</h1>
+    <h1>{post.name}</h1>
 
-    {post.node_stories.map(story => {
+    {post.relationships.node__stories.map(story => {
         return (
           <>
-          <h3><Link to={ story.id }>{ story.title }</Link></h3>
-          <p>{edge.node.field_stories_story_summary}</p>
+          <h3><Link to={`/${story.id}`} > { story.title } </Link></h3>
+          <p>{story.field_stories_story_summary}</p>
         </>
         )
     }
