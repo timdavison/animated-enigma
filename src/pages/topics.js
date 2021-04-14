@@ -15,9 +15,15 @@ const IndexPage = ({ data }) => {
     <h1>Explore our topics</h1>
 
     {data.allTaxonomyTermTags.nodes.map(node => {
+        let image = getImage(node.relationships.field_tag_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
+        console.log(image);
       return (
         <>
-          <h3><Link to={`/${node.id}` }>{ node.name }</Link></h3>
+          <h3>
+            <Link to={`/${node.id}` }>
+              <GatsbyImage image={image} alt=' ' /><br />{ node.name }
+            </Link>
+            </h3>
         </>
       )
     }
@@ -41,5 +47,30 @@ export const query = graphql`
         name
       }
     }
+
+    allTaxonomyTermTags {
+    nodes {
+      relationships {
+        field_tag_image {
+          id
+          relationships {
+            field_media_image {
+              id
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(
+                    placeholder: DOMINANT_COLOR,
+                    width: 250,
+                    formats: [AUTO, WEBP]
+                    )
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   }
 `
