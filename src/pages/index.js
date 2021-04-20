@@ -15,7 +15,7 @@ const IndexPage = ({ data }) => (
         console.log(image);
         return (
           <>
-          <h3><Link to={ edge.node.id }>{ edge.node.title }</Link></h3>
+          <h3><Link to={ edge.node.fields.slug }>{ edge.node.title }</Link></h3>
           <GatsbyImage image={image} alt=' ' />
           <p><small><em>{ Date(edge.node.created) }</em></small></p>
           <p>{edge.node.field_stories_story_summary}</p>
@@ -37,6 +37,9 @@ export const query = graphql`
       edges {
         node {
           title
+          fields {
+              slug
+            }
           field_stories_story_summary
           field_stories_story_author
           id

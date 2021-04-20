@@ -18,7 +18,7 @@ export default ({ data }) => {
     {post.relationships.node__stories.map(story => {
         return (
           <>
-          <h3><Link to={`/${story.id}`} > { story.title } </Link></h3>
+          <h3><Link to={`${story.fields.slug}`} > { story.title } </Link></h3>
           <p>{story.field_stories_story_summary}</p>
         </>
         )
@@ -39,6 +39,9 @@ export const query = graphql`
       relationships {
         node__stories {
           title
+          fields {
+            slug
+          }
           id
           field_stories_story_summary
         }

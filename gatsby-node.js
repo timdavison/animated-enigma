@@ -60,7 +60,7 @@ module.exports.onCreateNode = ({ node, actions }) => {
     result.data.allNodeStories.edges.forEach(({ node }) => {
       console.log(node);
       createPage({
-        path: node.path.alias ? node.path.alias : ("/story/" + slugify(node.title)),
+        path: node.fields.slug,
         component: path.resolve(`./src/templates/story.js`),
         context: {
           id: node.id,
