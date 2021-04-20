@@ -5,7 +5,18 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
-    `gatsby-plugin-material-ui`,
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        theme: {
+          palette: {
+            primary: {
+                main: '#BA3D3B', // new color here
+            },
+          },
+        },
+      },
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
