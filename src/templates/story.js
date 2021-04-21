@@ -15,7 +15,7 @@ export default ({ data }) => {
   return (
     <Layout>
       <div>
-        <h1>{ post.title }</h1>
+        <h2>{ post.title }</h2>
         <GatsbyImage image={image} alt=' ' />
         <p><small>{post.field_stories_story_author}</small></p>
         <small><em>{ Date(post.created) }</em></small>

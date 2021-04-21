@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -30,9 +30,10 @@ const Layout = ({ children }) => {
             marginTop: `2rem`,
             }}
           >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
+                <p style={{ marginTop: '3rem' }}>
+        <Link to="/">Homepage</Link> <span> | </span>
+        <Link to="/topics/">Topics page</Link>
+      </p>
         </footer>
         </Container>
     </>

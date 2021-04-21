@@ -6,10 +6,11 @@ import { Link } from "gatsby"
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
-    minHeight: 128,
-    alignItems: 'flex-start',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2),
+    minHeight: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(1),
   },
 }));
 
@@ -21,6 +22,11 @@ export default function Header ({ siteTitle }) {
           <h1 >
           <Link
             to="/"
+            style={{
+              color: `white`,
+              textDecoration: `none`,
+            }}
+
           >
             {siteTitle}
           </Link>

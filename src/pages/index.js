@@ -8,7 +8,7 @@ import SEO from "../components/seo"
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
-    <h1>Stories</h1>
+    <h2>Our Latest Stories</h2>
     <p>Ideas, insights and proposals from the Cambridge Zero network on advancing a zero-carbon world. </p>
     {data.allNodeStories.edges.map(edge => {
         let image = getImage(edge.node.relationships.field_stories_header_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
@@ -23,9 +23,6 @@ const IndexPage = ({ data }) => (
         )
     }
 )}
-    <p>
-      <Link to="/topics/">Go to topics page</Link> <br />
-    </p>
   </Layout>
 )
 

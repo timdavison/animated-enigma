@@ -13,7 +13,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Topics" />
-      <h1>Explore our topics</h1>
+      <h2>Explore our topics</h2>
       <Grid container spacing={1}>
         {data.allTaxonomyTermTags.nodes.map(node => {
           let image = getImage(node.relationships.field_tag_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
@@ -24,9 +24,6 @@ const IndexPage = ({ data }) => {
         }
         )}
       </Grid>
-      <p>
-        <Link to="/">Go to Homepage</Link> <br />
-      </p>
     </Layout>
   )
 }

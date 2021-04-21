@@ -12,22 +12,18 @@ export default ({ data }) => {
 
   return (
     <Layout>
-    <h1>{post.name}</h1>
-    <GatsbyImage image={image} alt=' ' />
+      <h2>{post.name}</h2>
+      <GatsbyImage image={image} alt=' ' />
 
-    {post.relationships.node__stories.map(story => {
+      {post.relationships.node__stories.map(story => {
         return (
           <>
-          <h3><Link to={`${story.fields.slug}`} > { story.title } </Link></h3>
-          <p>{story.field_stories_story_summary}</p>
-        </>
+            <h3><Link to={`${story.fields.slug}`} > { story.title } </Link></h3>
+            <p>{story.field_stories_story_summary}</p>
+          </>
         )
-    }
-)}
-    <p>
-      <Link to="/topics/">Go to topics page</Link> <br />
-    </p>
-  </Layout>
+      })}
+    </Layout>
   )
 }
 
