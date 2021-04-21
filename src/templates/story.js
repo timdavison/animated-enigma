@@ -19,7 +19,7 @@ export default ({ data }) => {
         <GatsbyImage image={image} alt=' ' />
         <p><small>{post.field_stories_story_author}</small></p>
         <small><em>{ Date(post.created) }</em></small>
-        <p>{post.field_stories_story_summary}</p>
+        <div dangerouslySetInnerHTML={{ __html: post.body.value }}></div>
         <List>
           {tags.map(function(t){
             return (
@@ -41,6 +41,9 @@ export const query = graphql`
   query($id: String!) {
     nodeStories(id: { eq: $id }) {
       title
+      body {
+        value
+      }
       field_stories_story_summary
       field_stories_story_author
       id
