@@ -13,11 +13,12 @@ const IndexPage = ({ data }) => (
     {data.allNodeStories.edges.map(edge => {
         let image = getImage(edge.node.relationships.field_stories_header_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
         console.log(image);
+        const created = new Date(edge.node.created);
         return (
           <>
           <h3><Link to={ edge.node.fields.slug }>{ edge.node.title }</Link></h3>
           <GatsbyImage image={image} alt=' ' />
-          <p><small><em>{ Date(edge.node.created) }</em></small></p>
+          <p><small><em>{ created.toDateString() }</em></small></p>
           <p>{edge.node.field_stories_story_summary}</p>
         </>
         )

@@ -6,11 +6,11 @@ import Layout from "../components/layout"
 
 export default ({ data }) => {
   const post = data.nodeStories
-  console.log(post)
+  console.log({post})
   const image = getImage(post.relationships.field_stories_header_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
-  //console.log(image)
+  //console.log(image).
   const tags = post.relationships.field_stories_tags;
-  console.log(tags);
+  const created = new Date(post.created);
 
   return (
     <Layout>
@@ -18,7 +18,8 @@ export default ({ data }) => {
         <h2>{ post.title }</h2>
         <GatsbyImage image={image} alt=' ' />
         <p><small>{post.field_stories_story_author}</small></p>
-        <small><em>{ Date(post.created) }</em></small>
+        <small><em>
+        {created.toDateString()} </em></small>
         <div dangerouslySetInnerHTML={{ __html: post.body.value }}></div>
         <List>
           {tags.map(function(t){
