@@ -29,7 +29,7 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: `http://news-proto-d9.ddev.site/`,
+        baseUrl: `https://www2.zero.cam.ac.uk/`,
       },
     },
     `gatsby-transformer-sharp`,

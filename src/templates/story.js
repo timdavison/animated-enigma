@@ -10,6 +10,10 @@ export default ({ data }) => {
   const image = getImage(post.relationships.field_stories_header_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
   //console.log(image).
   const tags = post.relationships.field_stories_tags;
+
+  // just get the first of the text paragraphs for now
+  const para = post.relationships.field_stories_content_items[0].field_para_text[0].value;
+  console.log(para);
   const created = new Date(post.created);
 
   return (
@@ -20,7 +24,7 @@ export default ({ data }) => {
         <p><small>{post.field_stories_story_author}</small></p>
         <small><em>
         {created.toDateString()} </em></small>
-        <div dangerouslySetInnerHTML={{ __html: post.body.value }}></div>
+        <div dangerouslySetInnerHTML={{ __html: para }}></div>
         <List>
           {tags.map(function(t){
             return (
@@ -42,9 +46,6 @@ export const query = graphql`
   query($id: String!) {
     nodeStories(id: { eq: $id }) {
       title
-      body {
-        value
-      }
       field_stories_story_summary
       field_stories_story_author
       id
@@ -69,6 +70,13 @@ export const query = graphql`
             name
             id
           }
+          field_stories_content_items {
+        ... on paragraph__text {
+          field_para_text {
+            value
+          }
+        }
+      }
       }
     }
   }

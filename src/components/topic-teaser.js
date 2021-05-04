@@ -9,8 +9,8 @@ return (
   <Grid item xs={12} sm={6} md={3} >
     <Card elevation={12} style={{ height: '100%' }}>
       <CardContent>
-        <GatsbyImage image={image} alt=' ' style={{ height: '150px' }} />
         <Link to={`/${node.id}` }>
+          <GatsbyImage image={image} alt=' ' style={{ height: '150px' }} />
           <br />{ node.name }
         </Link>
       </CardContent>
