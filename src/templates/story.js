@@ -12,7 +12,7 @@ export default ({ data }) => {
   const tags = post.relationships.field_stories_tags;
 
   // just get the first of the text paragraphs for now
-  const para = post.relationships.field_stories_content_items[0].field_para_text[0].value;
+  // const para = post.relationships.field_stories_content_items[0].field_para_text[0].value;
   console.log(para);
   const created = new Date(post.created);
 
@@ -24,7 +24,7 @@ export default ({ data }) => {
         <p><small>{post.field_stories_story_author}</small></p>
         <small><em>
         {created.toDateString()} </em></small>
-        <div dangerouslySetInnerHTML={{ __html: para }}></div>
+        <div>{post.field_stories_story_summary}</div>
         <List>
           {tags.map(function(t){
             return (
