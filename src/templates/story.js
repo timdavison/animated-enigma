@@ -13,7 +13,7 @@ export default ({ data }) => {
 
   // just get the first of the text paragraphs for now
   // const para = post.relationships.field_stories_content_items[0].field_para_text[0].value;
-  console.log(para);
+  // console.log(para);
   const created = new Date(post.created);
 
   return (
