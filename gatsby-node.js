@@ -26,7 +26,6 @@ module.exports.onCreateNode = ({ node, actions }) => {
 
     if (node.internal.type === "node__stories") {
         const slug = node.path.alias ? node.path.alias : ("/story/" + slugify(node.title));
-
         createNodeField({
             node,
             name: 'slug',
@@ -58,7 +57,7 @@ module.exports.onCreateNode = ({ node, actions }) => {
     }
   `).then(result => {
     result.data.allNodeStories.edges.forEach(({ node }) => {
-      console.log(node);
+      //console.log(node);
       createPage({
         path: node.fields.slug,
         component: path.resolve(`./src/templates/story.js`),

@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 
 const storyPage = ({ data }) => {
   const post = data.nodeStories
-  console.log({post})
+  //console.log({post})
   const image = getImage(post.relationships.field_stories_header_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
   //console.log(image).
   const tags = post.relationships.field_stories_tags;

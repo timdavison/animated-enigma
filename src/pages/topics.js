@@ -7,7 +7,7 @@ import TopicTeaser from '../components/topic-teaser'
 import { Grid } from "@material-ui/core";
 
 const IndexPage = ({ data }) => {
-  console.log(data.allTaxonomyTermTags.nodes);
+  //console.log(data.allTaxonomyTermTags.nodes);
 
   return (
     <Layout>

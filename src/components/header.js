@@ -26,7 +26,6 @@ export default function Header ({ siteTitle }) {
               color: `white`,
               textDecoration: `none`,
             }}
-
           >
             {siteTitle}
           </Link>

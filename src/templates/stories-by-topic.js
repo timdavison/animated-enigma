@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 
 const storyByTopic = ({ data }) => {
   const post = data.taxonomyTermTags
-  console.log(post)
+  //console.log(post)
   let image = getImage(post.relationships.field_tag_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
   //console.log(image);
 
