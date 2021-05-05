@@ -4,7 +4,7 @@ module.exports = {
     description: `Prototype News site.`,
     author: `@gatsbyjs`,
   },
-  pathPrefix: "/animated-enigma"
+  pathPrefix: "/animated-enigma",
   plugins: [
     {
       resolve: `gatsby-plugin-material-ui`,
