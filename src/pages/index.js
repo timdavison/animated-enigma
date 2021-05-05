@@ -3,11 +3,11 @@ import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/Seo"
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <SEO title="Home" />
+    <Seo title="Home" />
     <h2>Our Latest Stories</h2>
     <p>Ideas, insights and proposals from the Cambridge Zero network on advancing a zero-carbon world. </p>
     {data.allNodeStories.edges.map(edge => {
@@ -27,7 +27,7 @@ const IndexPage = ({ data }) => (
   </Layout>
 )
 
-export default IndexPage
+export default IndexPage;
 
 export const query = graphql`
   query {

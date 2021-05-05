@@ -4,7 +4,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Chip, List, ListItem } from '@material-ui/core';
 import Layout from "../components/layout"
 
-export default ({ data }) => {
+const storyPage = ({ data }) => {
   const post = data.nodeStories
   console.log({post})
   const image = getImage(post.relationships.field_stories_header_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
@@ -41,6 +41,7 @@ export default ({ data }) => {
   )
 }
 
+export default storyPage;
 
 export const query = graphql`
   query($id: String!) {

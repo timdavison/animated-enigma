@@ -4,18 +4,18 @@ import { Link } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 
-export default ({ data }) => {
+const storyByTopic = ({ data }) => {
   const post = data.taxonomyTermTags
   console.log(post)
   let image = getImage(post.relationships.field_tag_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
-  console.log(image);
+  //console.log(image);
 
   return (
     <Layout>
       <h2>{post.name}</h2>
       <GatsbyImage image={image} alt=' ' />
 
-      {post.relationships.node__stories.map(story => {
+      {post.relationships.node__stories && post.relationships.node__stories.map(story => {
         return (
           <>
             <h3><Link to={`${story.fields.slug}`} > { story.title } </Link></h3>
@@ -26,6 +26,8 @@ export default ({ data }) => {
     </Layout>
   )
 }
+
+export default storyByTopic;
 
 export const query = graphql`
   query($id: String!) {
