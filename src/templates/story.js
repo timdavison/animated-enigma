@@ -3,17 +3,13 @@ import { graphql, Link } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Chip, List, ListItem } from '@material-ui/core';
 import Layout from "../components/layout"
+import ContentItem from "../components/ContentItem";
 
 const storyPage = ({ data }) => {
   const post = data.nodeStories
-  //console.log({post})
   const image = getImage(post.relationships.field_stories_header_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
-  //console.log(image).
   const tags = post.relationships.field_stories_tags;
-
-  // just get the first of the text paragraphs for now
-  // const para = post.relationships.field_stories_content_items[0].field_para_text[0].value;
-  // console.log(para);
+  const items = post.relationships.field_stories_content_items;
   const created = new Date(post.created);
 
   return (
@@ -25,6 +21,16 @@ const storyPage = ({ data }) => {
         <small><em>
         {created.toDateString()} </em></small>
         <div>{post.field_stories_story_summary}</div>
+        {items.map(function(item){
+            return (
+              <div key={item.id}>
+                <ContentItem
+                  type={item.relationships.paragraph_type.label}
+                  item={item}>
+                </ContentItem>
+              </div>
+            )
+          })}
         <List>
           {tags.map(function(t){
             return (
@@ -67,14 +73,51 @@ export const query = graphql`
             }
           }
         }
-        field_stories_tags {
+          field_stories_tags {
             name
             id
           }
           field_stories_content_items {
+        ... on paragraph__html {
+          id
+          field_para_html_text {
+            value
+          }
+          relationships {
+            paragraph_type {
+              label
+            }
+          }
+        }
+        ... on paragraph__single_image {
+          id
+          relationships {
+            field_paragraphs_single_image {
+              name
+              relationships {
+                field_media_image {
+                  localFile {
+                    childImageSharp {
+                      gatsbyImageData(placeholder: DOMINANT_COLOR, width: 1280, formats: AUTO )
+                    }
+                  }
+                }
+              }
+            }
+            paragraph_type {
+              label
+            }
+          }
+        }
         ... on paragraph__text {
+          id
           field_para_text {
             value
+          }
+          relationships {
+            paragraph_type {
+              label
+            }
           }
         }
       }
