@@ -1,13 +1,13 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Chip, List, ListItem } from '@material-ui/core';
 import Layout from "../components/layout"
 import ContentItem from "../components/ContentItem";
+import DrupalImage from "../components/DrupalImage";
 
 const storyPage = ({ data }) => {
   const post = data.nodeStories
-  const image = getImage(post.relationships.field_stories_header_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
+  const image = post.relationships.field_stories_header_image;
   const tags = post.relationships.field_stories_tags;
   const items = post.relationships.field_stories_content_items;
   const created = new Date(post.created);
@@ -16,7 +16,7 @@ const storyPage = ({ data }) => {
     <Layout>
       <div>
         <h2>{ post.title }</h2>
-        <GatsbyImage image={image} alt=' ' />
+        <DrupalImage imageField={image} alt=' ' />
         <p><small>{post.field_stories_story_author}</small></p>
         <small><em>
         {created.toDateString()} </em></small>

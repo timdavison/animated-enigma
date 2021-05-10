@@ -1,9 +1,9 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import { graphql } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/Seo"
+import DrupalImage from "../components/DrupalImage"
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -11,19 +11,18 @@ const IndexPage = ({ data }) => (
     <h2>Our Latest Stories</h2>
     <p>Ideas, insights and proposals from the Cambridge Zero network on advancing a zero-carbon world. </p>
     {data.allNodeStories.edges.map(edge => {
-        let image = getImage(edge.node.relationships.field_stories_header_image.relationships.field_media_image.localFile.childImageSharp.gatsbyImageData);
-        console.log(image);
-        const created = new Date(edge.node.created);
-        return (
-          <>
-          <h3><Link to={ edge.node.fields.slug }>{ edge.node.title }</Link></h3>
-          <GatsbyImage image={image} alt=' ' />
-          <p><small><em>{ created.toDateString() }</em></small></p>
-          <p>{edge.node.field_stories_story_summary}</p>
+      const image = edge.node.relationships.field_stories_header_image;
+      const created = new Date(edge.node.created);
+      return (
+        <>
+        <h3><Link to={ edge.node.fields.slug }>{ edge.node.title }</Link></h3>
+        <DrupalImage imageField={image} alt=' ' />
+        <p><small><em>{ created.toDateString() }</em></small></p>
+        <p>{edge.node.field_stories_story_summary}</p>
         </>
-        )
+      )
     }
-)}
+  )}
   </Layout>
 )
 
