@@ -2,12 +2,10 @@ import * as React from "react"
 import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import Seo from "../components/Seo"
 import DrupalImage from "../components/DrupalImage"
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <Seo title="Home" />
     <h2>Our Latest Stories</h2>
     <p>Ideas, insights and proposals from the Cambridge Zero network on advancing a zero-carbon world. </p>
     {data.allNodeStories.edges.map(edge => {
