@@ -2,7 +2,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
-import Seo from "../components/Seo"
 import TopicTeaser from '../components/topic-teaser'
 import { Grid } from "@material-ui/core";
 
@@ -11,7 +10,6 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <Seo title="Topics" />
       <h2>Explore our topics</h2>
       <Grid container spacing={1}>
         {data.allTaxonomyTermTags.nodes.map(node => {
