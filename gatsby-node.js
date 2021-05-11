@@ -34,7 +34,6 @@ module.exports.onCreateNode = ({ node, actions }) => {
     }
 }
 
-
  exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -90,5 +89,29 @@ module.exports.onCreateNode = ({ node, actions }) => {
   });
 })
 
-  return Promise.all([stories, tags])
+const shorthand = graphql(`
+query {
+  allShorthandStoryShorthandStory {
+    edges {
+      node {
+        shorthand_id
+        name
+        id
+      }
+    }
+  }
+}
+`).then(result => {
+result.data.allShorthandStoryShorthandStory.edges.forEach(({ node }) => {
+  createPage({
+    path: node.id,
+    component: path.resolve('./src/templates/shorthand.js'),
+    context: {
+      id: node.id,
+    },
+  });
+});
+})
+
+  return Promise.all([stories, tags, shorthand])
 };
