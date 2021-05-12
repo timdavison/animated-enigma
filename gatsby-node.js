@@ -3,11 +3,9 @@
  *
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
- const path = require(`path`);
- const { slugify } = require("./src/utility/slugify");
- //const slugify = require('./utility/slugify.js');
+const path = require(`path`);
 
- /**function slugify(string) {
+function slugify(string) {
   const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
   const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
   const p = new RegExp(a.split('').join('|'), 'g')
@@ -21,7 +19,6 @@
     .replace(/^-+/, '') // Trim - from start of text
     .replace(/-+$/, '') // Trim - from end of text
 }
-*/
 
 
 module.exports.onCreateNode = ({ node, actions }) => {
@@ -35,6 +32,16 @@ module.exports.onCreateNode = ({ node, actions }) => {
             value: slug
         })
     }
+
+  if (node.internal.type === "taxonomy_term__tags") {
+    const slug = node.path.alias ? node.path.alias : ("/topic/" + slugify(node.name));
+    createNodeField({
+      node,
+      name: 'slug',
+      value: slug
+    })
+  }
+
 }
 
  exports.createPages = ({ graphql, actions }) => {
@@ -76,6 +83,10 @@ module.exports.onCreateNode = ({ node, actions }) => {
       edges {
         node {
           id
+          name
+          fields {
+            slug
+          }
         }
       }
     }
@@ -83,7 +94,7 @@ module.exports.onCreateNode = ({ node, actions }) => {
 `).then(result => {
   result.data.allTaxonomyTermTags.edges.forEach(({ node }) => {
     createPage({
-      path: node.id,
+      path: node.fields.slug,
       component: path.resolve('./src/templates/stories-by-topic.js'),
       context: {
         id: node.id,

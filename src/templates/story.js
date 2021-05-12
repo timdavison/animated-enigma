@@ -35,7 +35,7 @@ const storyPage = ({ data }) => {
           {tags.map(function(t){
             return (
               <ListItem key={t.name}>
-                <Link to={`/${t.id}` }>
+                <Link to={`${t.fields.slug}` }>
                   <Chip color="primary" label={t.name} key={t.id}></Chip>
                 </Link>
               </ListItem>
@@ -76,6 +76,9 @@ export const query = graphql`
           field_stories_tags {
             name
             id
+            fields {
+              slug
+            }
           }
           field_stories_content_items {
         ... on paragraph__html {

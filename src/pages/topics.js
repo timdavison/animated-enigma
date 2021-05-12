@@ -33,9 +33,11 @@ export const query = graphql`
         id
         weight
         name
+        fields {
+        slug
+      }
       }
     }
-
     allTaxonomyTermTags {
     nodes {
       relationships {
