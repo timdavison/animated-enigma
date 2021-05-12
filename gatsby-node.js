@@ -3,9 +3,11 @@
  *
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
- const path = require(`path`)
+ const path = require(`path`);
+ const { slugify } = require("./src/utility/slugify");
+ //const slugify = require('./utility/slugify.js');
 
- function slugify(string) {
+ /**function slugify(string) {
   const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
   const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
   const p = new RegExp(a.split('').join('|'), 'g')
@@ -19,6 +21,7 @@
     .replace(/^-+/, '') // Trim - from start of text
     .replace(/-+$/, '') // Trim - from end of text
 }
+*/
 
 
 module.exports.onCreateNode = ({ node, actions }) => {
