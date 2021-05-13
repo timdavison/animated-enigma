@@ -22,6 +22,9 @@ const IndexPage = ({ data }) => (
     }
   )}
 
+<h2>Our Longer Stories </h2>
+<p>Pull up a chair, grab a drink, and browse through our collection of longer reads.</p>
+
 {data.allShorthandStoryShorthandStory.edges.map(edge => {
       const created = new Date(edge.node.created);
       const shorthandPath = `/shorthand/stories/${edge.node.shorthand_id}/${edge.node.drupal_id}/index.html`;
@@ -29,7 +32,7 @@ const IndexPage = ({ data }) => (
         <>
         <h3><Link to={ edge.node.fields.slug }>{ edge.node.name }</Link></h3>
         <p><Link to={ shorthandPath }>{ edge.node.name }</Link></p>
-        <p><a href={shorthandPath}>{edge.node.name}</a></p>
+        <img src={edge.node.thumbnail} alt="image from shorthand" />
         <p><small><em>{ created.toDateString() }</em></small></p>
         <p>{edge.node.description}</p>
         </>
