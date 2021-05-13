@@ -6,10 +6,17 @@ const shorthandPage = ({ data }) => {
 
   const post = data.shorthandStoryShorthandStory;
 
+  const shorthandPath = `/shorthand/stories/${post.shorthand_id}/${post.drupal_id}/index.html`;
+
+  <a href='/shorthand/stories/efoOPKBkqv/d39c8a3c-f70e-44fa-b76c-90cae598deae/index.html'> Another story page</a>
+
+
   return (
     <Layout>
       <div>
-      <h2>{ post.name}</h2>
+
+      <a href={`${shorthandPath}`}>{post.name}</a>
+
       </div>
     </Layout>
   )
@@ -24,6 +31,7 @@ export const query = graphql`
       name
       shorthand_id
       description
+      drupal_id
       id
     }
   }
