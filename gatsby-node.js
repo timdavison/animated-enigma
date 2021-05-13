@@ -42,6 +42,15 @@ module.exports.onCreateNode = ({ node, actions }) => {
     })
   }
 
+  if (node.internal.type === "shorthand_story__shorthand_story") {
+    const slug = ("/shorthand/" + slugify(node.name));
+    createNodeField({
+      node,
+      name: 'slug',
+      value: slug
+    })
+  }
+
 }
 
  exports.createPages = ({ graphql, actions }) => {
@@ -111,6 +120,9 @@ query {
         shorthand_id
         name
         id
+        fields {
+          slug
+        }
       }
     }
   }
@@ -118,7 +130,7 @@ query {
 `).then(result => {
 result.data.allShorthandStoryShorthandStory.edges.forEach(({ node }) => {
   createPage({
-    path: node.id,
+    path: node.fields.slug,
     component: path.resolve('./src/templates/shorthand.js'),
     context: {
       id: node.id,

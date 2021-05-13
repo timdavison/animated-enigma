@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql} from "gatsby"
-import Layout from "../components/layout"
 
 const shorthandPage = ({ data }) => {
 
@@ -8,17 +7,10 @@ const shorthandPage = ({ data }) => {
 
   const shorthandPath = `/shorthand/stories/${post.shorthand_id}/${post.drupal_id}/index.html`;
 
-  <a href='/shorthand/stories/efoOPKBkqv/d39c8a3c-f70e-44fa-b76c-90cae598deae/index.html'> Another story page</a>
-
-
   return (
-    <Layout>
-      <div>
-
-      <a href={`${shorthandPath}`}>{post.name}</a>
-
-      </div>
-    </Layout>
+    <div>
+       <iframe  src={`${shorthandPath}`} title={post.name} style={{width:'100%',height:'100vh',border: 'none'}}></iframe>
+    </div>
   )
 }
 

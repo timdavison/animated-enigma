@@ -21,6 +21,23 @@ const IndexPage = ({ data }) => (
       )
     }
   )}
+
+{data.allShorthandStoryShorthandStory.edges.map(edge => {
+      const created = new Date(edge.node.created);
+      const shorthandPath = `/shorthand/stories/${edge.node.shorthand_id}/${edge.node.drupal_id}/index.html`;
+      return (
+        <>
+        <h3><Link to={ edge.node.fields.slug }>{ edge.node.name }</Link></h3>
+        <p><Link to={ shorthandPath }>{ edge.node.name }</Link></p>
+        <p><a href={shorthandPath}>{edge.node.name}</a></p>
+        <p><small><em>{ created.toDateString() }</em></small></p>
+        <p>{edge.node.description}</p>
+        </>
+      )
+    }
+    )}
+
+
   </Layout>
 )
 
@@ -56,6 +73,22 @@ export const query = graphql`
           }
         }
       }
+        }
+      }
+    }
+    allShorthandStoryShorthandStory {
+      edges {
+        node {
+          drupal_id
+          fields {
+            slug
+          }
+          external_url
+          name
+          shorthand_id
+          thumbnail
+          description
+          created
         }
       }
     }
