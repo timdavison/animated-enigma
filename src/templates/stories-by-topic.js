@@ -16,10 +16,12 @@ const storyByTopic = ({ data }) => {
       <GatsbyImage image={image} alt=' ' />
 
       {post.relationships.node__stories && post.relationships.node__stories.map(story => {
+        const rawSummary = (story.field_stories_story_summary) ? story.field_stories_story_summary : "This story has no summary";
+        const summary = (rawSummary.length <= 300) ? rawSummary : rawSummary.slice(0,300) + "...";
         return (
           <>
             <h3><Link to={`${story.fields.slug}`} > { story.title } </Link></h3>
-            <p>{story.field_stories_story_summary}</p>
+            <p>{summary}</p>
           </>
         )
       })}

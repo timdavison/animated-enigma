@@ -11,12 +11,14 @@ const IndexPage = ({ data }) => (
     {data.allNodeStories.edges.map(edge => {
       const image = edge.node.relationships.field_stories_header_image;
       const created = new Date(edge.node.created);
+      const rawSummary = (edge.node.field_stories_story_summary) ? edge.node.field_stories_story_summary : "This story has no summary";
+      const summary = (rawSummary.length <= 300) ? rawSummary : rawSummary.slice(0,300) + "...";
       return (
         <>
         <h3><Link to={ edge.node.fields.slug }>{ edge.node.title }</Link></h3>
         <DrupalImage imageField={image} alt=' ' />
         <p><small><em>{ created.toDateString() }</em></small></p>
-        <p>{edge.node.field_stories_story_summary}</p>
+        <p>{summary}</p>
         </>
       )
     }
