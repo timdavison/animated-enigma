@@ -3,11 +3,31 @@ import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import DrupalImage from "../components/DrupalImage"
+import FullTeaser from "../components/FullTeaser"
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <h2>Our Latest Stories</h2>
+
     <p>Ideas, insights and proposals from the Cambridge Zero network on advancing a zero-carbon world. </p>
+
+    <h2>Today's featured story</h2>
+    {data.allEntitySubqueueHomepageFeature.edges.map(edge => {
+      console.log(edge);
+      return (
+        <FullTeaser
+          title={edge.node.relationships.items[0].title}
+          slug={edge.node.relationships.items[0].fields.slug}
+          summary={edge.node.relationships.items[0].field_stories_story_summary}
+          created={edge.node.relationships.items[0].created}
+          image={edge.node.relationships.items[0].relationships.field_stories_header_image}
+        >
+        </FullTeaser>
+      )
+    }
+  )}
+
+<h2>More exciting stuff</h2>
+
     {data.allNodeStories.edges.map(edge => {
       const image = edge.node.relationships.field_stories_header_image;
       const created = new Date(edge.node.created);
@@ -94,6 +114,42 @@ export const query = graphql`
           thumbnail
           description
           created
+        }
+      }
+    }
+    allEntitySubqueueHomepageFeature {
+      edges {
+        node {
+          title
+          relationships {
+            items {
+              title
+              fields {
+                slug
+              }
+              field_stories_story_summary
+              field_stories_story_author
+              id
+              created
+              relationships {
+                field_stories_header_image {
+                  relationships {
+                    field_media_image {
+                      localFile {
+                        childImageSharp {
+                          gatsbyImageData(
+                            placeholder: BLURRED,
+                            width: 658,
+                            formats: [AUTO, WEBP]
+                          )
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
