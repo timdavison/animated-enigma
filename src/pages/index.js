@@ -2,14 +2,11 @@ import * as React from "react"
 import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import DrupalImage from "../components/DrupalImage"
 import FullTeaser from "../components/FullTeaser"
 
 const IndexPage = ({ data }) => (
   <Layout>
-
     <p>Ideas, insights and proposals from the Cambridge Zero network on advancing a zero-carbon world. </p>
-
     <h2>Today's featured story</h2>
     {data.allEntitySubqueueHomepageFeature.edges.map(edge => {
       console.log(edge);
@@ -20,34 +17,31 @@ const IndexPage = ({ data }) => (
           summary={edge.node.relationships.items[0].field_stories_story_summary}
           created={edge.node.relationships.items[0].created}
           image={edge.node.relationships.items[0].relationships.field_stories_header_image}
-        >
-        </FullTeaser>
+        />
       )
-    }
-  )}
+    })}
 
-<h2>More exciting stuff</h2>
-
+    <h2>More super exciting stuff</h2>
     {data.allNodeStories.edges.map(edge => {
       const image = edge.node.relationships.field_stories_header_image;
       const created = new Date(edge.node.created);
       const rawSummary = (edge.node.field_stories_story_summary) ? edge.node.field_stories_story_summary : "This story has no summary";
       const summary = (rawSummary.length <= 300) ? rawSummary : rawSummary.slice(0,300) + "...";
       return (
-        <>
-        <h3><Link to={ edge.node.fields.slug }>{ edge.node.title }</Link></h3>
-        <DrupalImage imageField={image} alt=' ' />
-        <p><small><em>{ created.toDateString() }</em></small></p>
-        <p>{summary}</p>
-        </>
+        <FullTeaser
+        title={edge.node.title}
+        slug={edge.node.fields.slug}
+        summary={summary}
+        created={created}
+        image={image}
+        />
       )
-    }
-  )}
+    })}
 
-<h2>Our Longer Stories </h2>
-<p>Pull up a chair, grab a drink, and browse through our collection of longer reads.</p>
+    <h2>Our Longer Stories </h2>
+    <p>Pull up a chair, grab a drink, and browse through our collection of longer reads.</p>
 
-{data.allShorthandStoryShorthandStory.edges.map(edge => {
+    {data.allShorthandStoryShorthandStory.edges.map(edge => {
       const created = new Date(edge.node.created);
       const shorthandPath = `/shorthand/stories/${edge.node.shorthand_id}/${edge.node.drupal_id}/index.html`;
       return (
@@ -59,10 +53,7 @@ const IndexPage = ({ data }) => (
         <p>{edge.node.description}</p>
         </>
       )
-    }
-    )}
-
-
+    })}
   </Layout>
 )
 
