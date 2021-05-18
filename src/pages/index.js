@@ -46,15 +46,15 @@ const IndexPage = ({ data }) => {
       const shorthandPath = `/shorthand/stories/${edge.node.shorthand_id}/${edge.node.drupal_id}/index.html`;
       return (
         <>
-        <h3><Link to={ edge.node.fields.slug }>{ edge.node.name }</Link></h3>
-        <p><Link to={ shorthandPath }>{ edge.node.name }</Link></p>
-        <img src={edge.node.thumbnail} alt="image from shorthand" />
+        <h3><Link to={ shorthandPath }>{ edge.node.name }</Link></h3>
+        <img src={edge.node.thumbnail} alt="need to get data from shorthand" />
         <p><small><em>{ created.toDateString() }</em></small></p>
         <p>{edge.node.description}</p>
         </>
       )
     })}
 
+    <hr />
     <p>We have {data.allNodeStories.totalCount} news stories and {data.allShorthandStoryShorthandStory.totalCount} long reads.</p>
   </Layout>
 )
