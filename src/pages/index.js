@@ -54,6 +54,8 @@ const IndexPage = ({ data }) => {
         </>
       )
     })}
+
+    <p>We have {data.allNodeStories.totalCount} news stories and {data.allShorthandStoryShorthandStory.totalCount} long reads.</p>
   </Layout>
 )
   }
@@ -63,6 +65,7 @@ export default IndexPage;
 export const query = graphql`
   query {
     allShorthandStoryShorthandStory {
+      totalCount
       edges {
         node {
           drupal_id
@@ -146,6 +149,9 @@ export const query = graphql`
           }
         }
       }
+    }
+    allNodeStories {
+      totalCount
     }
   }
 `
