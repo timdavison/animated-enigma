@@ -4,12 +4,16 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import FullTeaser from "../components/FullTeaser"
 
-const IndexPage = ({ data }) => (
+const IndexPage = ({ data }) => {
+
+  const latestQueue = data.allEntitySubqueueHomepageLatest.nodes[0].relationships;
+
+  return (
+
   <Layout>
     <p>Ideas, insights and proposals from the Cambridge Zero network on advancing a zero-carbon world. </p>
     <h2>Today's featured story</h2>
     {data.allEntitySubqueueHomepageFeature.edges.map(edge => {
-      console.log(edge);
       return (
         <FullTeaser
           title={edge.node.relationships.items[0].title}
@@ -21,22 +25,18 @@ const IndexPage = ({ data }) => (
       )
     })}
 
-    <h2>More super exciting stuff</h2>
-    {data.allNodeStories.edges.map(edge => {
-      const image = edge.node.relationships.field_stories_header_image;
-      const created = new Date(edge.node.created);
-      const rawSummary = (edge.node.field_stories_story_summary) ? edge.node.field_stories_story_summary : "This story has no summary";
-      const summary = (rawSummary.length <= 300) ? rawSummary : rawSummary.slice(0,300) + "...";
-      return (
-        <FullTeaser
-        title={edge.node.title}
-        slug={edge.node.fields.slug}
-        summary={summary}
-        created={created}
-        image={image}
-        />
-      )
-    })}
+    <h2>Latest News</h2>
+        {latestQueue.items.map(item => {
+          return (
+            <FullTeaser
+              title={item.title}
+              slug={item.fields.slug}
+              summary={item.field_stories_story_summary}
+              created={item.created}
+              image={item.relationships.field_stories_header_image}
+            />
+          )
+        })}
 
     <h2>Our Longer Stories </h2>
     <p>Pull up a chair, grab a drink, and browse through our collection of longer reads.</p>
@@ -56,42 +56,12 @@ const IndexPage = ({ data }) => (
     })}
   </Layout>
 )
+  }
 
 export default IndexPage;
 
 export const query = graphql`
   query {
-    allNodeStories {
-      edges {
-        node {
-          title
-          fields {
-              slug
-            }
-          field_stories_story_summary
-          field_stories_story_author
-          id
-          created
-          relationships {
-        field_stories_header_image {
-          relationships {
-            field_media_image {
-              localFile {
-                childImageSharp {
-                  gatsbyImageData(
-                    placeholder: BLURRED,
-                    width: 658,
-                    formats: [AUTO, WEBP]
-                  )
-                }
-              }
-            }
-          }
-        }
-      }
-        }
-      }
-    }
     allShorthandStoryShorthandStory {
       edges {
         node {
@@ -134,6 +104,39 @@ export const query = graphql`
                             formats: [AUTO, WEBP]
                           )
                         }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    allEntitySubqueueHomepageLatest {
+      nodes {
+        id
+        title
+        relationships {
+          items {
+            title
+            fields {
+              slug
+            }
+            created
+            field_stories_story_summary
+            relationships {
+              field_stories_header_image {
+                relationships {
+                  field_media_image {
+                    localFile {
+                      childImageSharp {
+                        gatsbyImageData(
+                          placeholder: BLURRED,
+                          width: 658,
+                          formats: [AUTO, WEBP]
+                        )
                       }
                     }
                   }
