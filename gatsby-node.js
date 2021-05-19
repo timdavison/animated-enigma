@@ -56,6 +56,38 @@ module.exports.onCreateNode = ({ node, actions }) => {
  exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
+  const storyList = graphql(`
+    query {
+      allNodeStories {
+        totalCount
+      }
+    }
+  `).then(result => {
+
+  // 3. Figure out how many pages there are based on how many stories there are, and how many per page!
+  const pageSize = 12;
+  const pageCount = Math.ceil(result.data.allNodeStories.totalCount / pageSize);
+  console.log(
+    `There are ${result.data.allNodeStories.totalCount} total stories. And we have ${pageCount} pages with ${pageSize} per page`
+  );
+  // 4. Loop from 1 to n and create the pages for them
+  Array.from({ length: pageCount }).forEach((_, i) => {
+    console.log(`Creating page ${i}`);
+    actions.createPage({
+      path: `/storylist/${i + 1}`,
+      component: path.resolve('./src/templates/storyList.js'),
+      // This data is pass to the template when we create it
+      context: {
+        skip: i * pageSize,
+        currentPage: i + 1,
+        pageSize,
+      },
+    });
+  });
+
+
+  })
+
   const stories = graphql(`
     query {
       allNodeStories {
@@ -139,5 +171,5 @@ result.data.allShorthandStoryShorthandStory.edges.forEach(({ node }) => {
 });
 })
 
-  return Promise.all([stories, tags, shorthand])
+  return Promise.all([stories, tags, shorthand, storyList])
 };
