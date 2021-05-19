@@ -18,7 +18,7 @@ const PaginationStyles = styled.div`
     text-decoration: none;
     &[aria-current],
     &.current {
-      color: red;
+      color: #8B0000;
     }
     &[disabled] {
       pointer-events: none;

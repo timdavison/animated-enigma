@@ -15,22 +15,30 @@ const storyList = ({ data, pageContext }) => {
       currentPage={pageContext.currentPage}
       base="/storylist"
       />
-
+      <h2>See all our Stories</h2>
       {data.allNodeStories.nodes.map(node => {
-      const image = node.relationships.field_stories_header_image;
-      const created = new Date(node.created);
-      const rawSummary = (node.field_stories_story_summary) ? node.field_stories_story_summary : "This story has no summary";
-      const summary = (rawSummary.length <= 300) ? rawSummary : rawSummary.slice(0,300) + "...";
-      return (
-        <FullTeaser
-        title={node.title}
-        slug={node.fields.slug}
-        summary={summary}
-        created={created}
-        image={image}
-        />
-      )
-    })}
+        const image = node.relationships.field_stories_header_image;
+        const created = new Date(node.created);
+        const rawSummary = (node.field_stories_story_summary) ? node.field_stories_story_summary : "This story has no summary";
+        const summary = (rawSummary.length <= 300) ? rawSummary : rawSummary.slice(0,300) + "...";
+        return (
+          <FullTeaser
+          title={node.title}
+          slug={node.fields.slug}
+          summary={summary}
+          created={created}
+          image={image}
+          />
+        )
+      })}
+
+      <Pagination
+      pageSize={pageContext.pageSize}
+      totalPages={pageContext.totalPages}
+      currentPage={pageContext.currentPage}
+      base="/storylist"
+      />
+
     </Layout>
   )
 }
