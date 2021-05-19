@@ -2,13 +2,19 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import FullTeaser from "../components/FullTeaser"
+import Pagination from "../components/Pagination"
 
-const storyList = ({ data }) => {
+const storyList = ({ data, pageContext }) => {
 
 
   return (
     <Layout>
-      <h2>This page will have stories listed on it</h2>
+      <Pagination
+      pageSize={pageContext.pageSize}
+      totalPages={pageContext.totalPages}
+      currentPage={pageContext.currentPage}
+      base="/storylist"
+      />
 
       {data.allNodeStories.nodes.map(node => {
       const image = node.relationships.field_stories_header_image;
