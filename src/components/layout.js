@@ -30,11 +30,13 @@ const Layout = ({ children }) => {
             marginTop: `2rem`,
             }}
           >
-                <p style={{ marginTop: '3rem' }}>
+        <p style={{ marginTop: '3rem' }}>
         <Link to="/">Homepage</Link> <span> | </span>
         <Link to="/topics/">Topics page</Link> <span> | </span>
-        <Link to="/storylist/1">Full list of stories</Link>
-      </p>
+        <Link to="/storylist/1">Full list of stories</Link> <span> | </span>
+        <Link to="/topics/cities/rss.xml/1">Cities - rss feed</Link> <span> | </span>
+        <Link to="/topics/health/rss.xml/1">Health - rss feed</Link>
+        </p>
         </footer>
         </Container>
     </>
