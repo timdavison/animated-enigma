@@ -34,8 +34,8 @@ const Layout = ({ children }) => {
         <Link to="/">Homepage</Link> <span> | </span>
         <Link to="/topics/">Topics page</Link> <span> | </span>
         <Link to="/storylist/1">Full list of stories</Link> <span> | </span>
-        <Link to="/topics/cities/rss.xml/1">Cities - rss feed</Link> <span> | </span>
-        <Link to="/topics/health/rss.xml/1">Health - rss feed</Link>
+        <Link to="/topic/cities/rss.xml">Cities - rss feed</Link> <span> | </span>
+        <Link to="/topic/health/rss.xml">Health - rss feed</Link>
         </p>
         </footer>
         </Container>
