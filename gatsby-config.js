@@ -3,6 +3,7 @@ module.exports = {
     title: `Stories That Change the World`,
     description: `Prototype News site.`,
     author: `@gatsbyjs`,
+    siteUrl: `https://animatedenigmamain.gtsb.io`
   },
   pathPrefix: "/animated-enigma",
   plugins: [
@@ -19,6 +20,91 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allNodeStories } }) => {
+              return allNodeStories.nodes.map(node => {
+                return Object.assign({}, node, {
+                  description: node.field_stories_story_summary,
+                  date: node.created,
+                  url: site.siteMetadata.siteUrl + node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                })
+              })
+            },
+        query: `
+          {
+            allNodeStories(
+              limit: 10
+              sort: {order: DESC, fields: created}
+              filter: {relationships: {field_stories_tags: {elemMatch: {name: {eq: "Cities"}}}}}
+            ) {
+              nodes {
+                id
+                title
+                fields {
+                  slug
+                }
+                created
+                field_stories_story_summary
+              }
+            }
+          }
+        `,
+            output: "/topic/cities/rss.xml",
+            title: "RSS Feed",
+          },
+          {
+            serialize: ({ query: { site, allNodeStories } }) => {
+              return allNodeStories.nodes.map(node => {
+                return Object.assign({}, node, {
+                  description: node.field_stories_story_summary,
+                  date: node.created,
+                  url: site.siteMetadata.siteUrl + node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                })
+              })
+            },
+        query: `
+          {
+            allNodeStories(
+              limit: 10
+              sort: {order: DESC, fields: created}
+              filter: {relationships: {field_stories_tags: {elemMatch: {name: {eq: "Health"}}}}}
+            ) {
+              nodes {
+                id
+                title
+                fields {
+                  slug
+                }
+                created
+                field_stories_story_summary
+              }
+            }
+          }
+        `,
+            output: "/topic/health/rss.xml",
+            title: "RSS Feed",
+          },
+        ],
+      },
+    },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-image`,
     {
