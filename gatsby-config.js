@@ -3,7 +3,10 @@ module.exports = {
     title: `Stories That Change the World`,
     description: `Prototype News site.`,
     author: `@gatsbyjs`,
-    siteUrl: `https://animatedenigmamain.gtsb.io`
+    siteUrl: `https://animatedenigmamain.gtsb.io`,
+    siteTwitterUrl: `https://twitter.com/Cambridge_Uni?ref_src=twsrc%5Etfw`,
+    siteTwitterText: `Tweets by Cambridge_Uni`,
+
   },
   pathPrefix: "/animated-enigma",
   plugins: [
@@ -20,6 +23,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-twitter`,
     {
       resolve: `gatsby-plugin-feed`,
       options: {

@@ -3,10 +3,12 @@ import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import FullTeaser from "../components/FullTeaser"
+import TwitterFeed from "../components/TwitterFeed"
 
 const IndexPage = ({ data }) => {
-
+console.log(data);
   const latestQueue = data.allEntitySubqueueHomepageLatest.nodes[0].relationships;
+  const siteData = data.allSite.nodes[0].siteMetadata;
 
   return (
 
@@ -53,7 +55,9 @@ const IndexPage = ({ data }) => {
         </>
       )
     })}
-
+    <hr />
+    <h2>You can find us on twitter </h2>
+    <TwitterFeed url={siteData.siteTwitterUrl} text={siteData.siteTwitterText} />
     <hr />
     <p>We have {data.allNodeStories.totalCount} news stories and {data.allShorthandStoryShorthandStory.totalCount} long reads.</p>
   </Layout>
@@ -152,6 +156,14 @@ export const query = graphql`
     }
     allNodeStories {
       totalCount
+    }
+    allSite {
+      nodes {
+        siteMetadata {
+          siteTwitterUrl
+          siteTwitterText
+        }
+      }
     }
   }
 `
