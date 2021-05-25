@@ -123,6 +123,15 @@ export const query = graphql`
             }
           }
         }
+        ... on paragraph__youtube {
+          id
+          field_video_id
+          relationships {
+            paragraph_type {
+              label
+            }
+          }
+        }
       }
       }
     }
