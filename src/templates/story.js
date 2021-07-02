@@ -13,7 +13,7 @@ const storyPage = ({ data }) => {
   const created = new Date(post.created);
 
   return (
-    <Layout>
+    <Layout title={post.title}>
       <div>
         <h2>{ post.title }</h2>
         <DrupalImage imageField={image} alt=' ' />
