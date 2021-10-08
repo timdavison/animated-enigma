@@ -49,7 +49,7 @@ console.log(data);
       return (
         <>
         <h3><Link to={ shorthandPath }>{ edge.node.name }</Link></h3>
-        <img src={edge.node.thumbnail} alt="need to get data from shorthand" />
+
         <p><small><em>{ created.toDateString() }</em></small></p>
         <p>{edge.node.description}</p>
         </>
